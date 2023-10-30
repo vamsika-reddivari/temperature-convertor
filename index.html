@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        body{
+            display: flex;
+            align-items: center;
+            justify-content: center;
+           
+        }
+        .container{  
+            width: 800px;
+            height: 800px;
+            border: 1px solid black;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            /* justify-content: center; */
+            flex-direction: column;
+            gap: 15px;
+            background-color: aqua;
+        }
+        h1{
+            font-family:'Segoe UI', Tahoma, Geneva, Verdana, sans-serif ;
+        }
+        span{
+            font-size: 1.5rem;
+        }
+        #data{
+            width: 50%;
+            height: 50px;
+            border-radius: 3px;
+            font-size: 1.2rem;
+        }
+        #drop-down{
+            width: 50%;
+            height: 45px;
+        }
+        .rescontainer{
+            display: flex;
+            align-items: center;
+            width: 50%;
+            height: 45px;
+            font-size: 1rem;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+        @media screen and (max-width:600px){
+            .container{
+                width: 600px;
+            }
+            
+        }
+        @media screen and (max-width:400px){
+            .container{
+                width: 400px;
+            }
+            
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+       <h1>Temperature Converter Website</h1>
+       
+       <span>Enter the temprature :</span><input type="text" id="data" >
+       <span>Select the required conversion :</span>
+       <select id="drop-down">
+           <option value="c2f">Celsius TO Fahrenheit</option>
+           <option value="c2k">Celsius TO Kelvin</option>
+           <option value="f2c">Fahrenheit TO Celsius</option>
+           <option value="f2k">Fahrenheit TO Kelvin</option>
+           <option value="k2c">Kelvin TO Celsius</option>
+           <option value="k2f">Kelvin TO Fahrenheit</option>
+       </select>
+       <span>The Results are:</span>
+    </div>
+</body>
+<script>
+let mainbox = document.querySelector(".container");
+let newContainer1 = document.createElement("div");
+let newContainer2 = document.createElement("div");
+
+document.getElementById("drop-down").onchange = function() {
+    let temp = Number(document.getElementById("data").value);
+    newContainer1.remove();
+    newContainer2.remove();
+    let selectedOption = this.value;   
+    newContainer1.className = "rescontainer";
+    newContainer2.className = "rescontainer";
+    switch(selectedOption) {
+        case "c2f":
+            let resC2F = (9*temp)/5 + 32;
+            newContainer1.innerHTML = "Celsius :" + temp;
+            newContainer2.innerHTML = "Fahrenheit :" + resC2F;
+            break;
+
+        case "c2k":
+            let resC2K = temp + 273.15;
+            newContainer1.innerHTML = "Celsius :" + temp;
+            newContainer2.innerHTML = "Kelvin :" + resC2K;
+            break;
+
+        case "f2c":
+            let resF2C = (temp - 32) * 5/9;
+            newContainer1.innerHTML = "Fahrenheit :" + temp;
+            newContainer2.innerHTML = "Celsius :" + resF2C;
+            break;
+
+        case "f2k":
+            let resF2K = (temp - 32) * 5/9 + 273.15;
+            newContainer1.innerHTML = "Fahrenheit :" + temp;
+            newContainer2.innerHTML = "Kelvin :" + resF2K;
+            break;
+
+        case "k2c":
+            let resK2C = temp - 273.15;
+            newContainer1.innerHTML = "Kelvin :" + temp;
+            newContainer2.innerHTML = "Celsius :" + resK2C;
+            break;
+
+        case "k2f":
+            let resK2F = (temp - 273.15) * 9/5 + 32;
+            newContainer1.innerHTML = "Kelvin :" + temp;
+            newContainer2.innerHTML = "Fahrenheit :" + resK2F;
+            break;
+
+        default:
+            break;
+    }
+    mainbox.appendChild(newContainer1);
+    mainbox.appendChild(newContainer2);
+};
+
+
+</script>
+</html>
